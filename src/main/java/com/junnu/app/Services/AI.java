@@ -34,12 +34,12 @@ public class AI {
         }
     }
 
-    public String getSummary(String text) {
+    public String getSummary(String text,String instruction) {
         String json = String.format("""
             {
-                "text": "%s"
+                "text": "%s : %s"
                 }
-                """, text);
+                """,instruction, text);
         System.out.println(json);
         return sendhttpRequest(json);
     }
