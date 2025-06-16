@@ -32,8 +32,8 @@ public class Home {
             file.transferTo(new File(filePath));
             System.out.println(filePath);
             File uploadedFile = new File(filePath);
-            service.readFile(uploadedFile);
-            return ResponseEntity.ok("File uploaded successfully! Stored at: " + filePath);
+            String result = service.readFile(uploadedFile);
+            return ResponseEntity.ok("File uploaded successfully!  and the summay is \n" + result );
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
