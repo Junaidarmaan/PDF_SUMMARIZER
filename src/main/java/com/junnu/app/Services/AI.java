@@ -41,7 +41,7 @@ public class AI {
                 }
                 """, text);
         System.out.println(json);
-        return sendhttpRequest(text);
+        return sendhttpRequest(json);
     }
 
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>File Upload</title>
+</head>
+<body>
+  <h2>Upload a File</h2>
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" name="file" id="fileInput" required />
+    <button type="submit">Upload</button>
+  </form>
+
+  <p id="responseText"></p>
+
+  <script>
+    document.getElementById("uploadForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formData = new FormData();
+      const fileInput = document.getElementById("fileInput");
+      const file = fileInput.files[0];
+
+      formData.append("file", file);
+
+      fetch("http://localhost:8080/api/files/upload", {
+        method: "POST",
+        body: formData
+      })
+        .then(response => response.text())
+        .then(result => {
+          document.getElementById("responseText").innerText = result;
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          document.getElementById("responseText").innerText = "Error uploading file";
+        });
+    });
+  </script>
+</body>
+</html>

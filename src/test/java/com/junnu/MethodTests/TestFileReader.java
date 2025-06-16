@@ -11,7 +11,7 @@ public class TestFileReader {
         FileReaderService reader = new FileReaderService();
         @Test
         public void readFile(){
-           String result =  reader.readFile(new File("test.java"));
+           String result =  reader.readFile(new File("test.pdf"));
             System.out.println("Result : " + result);
         }
 }

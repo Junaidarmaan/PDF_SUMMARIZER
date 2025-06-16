@@ -9,6 +9,7 @@ import org.apache.tika.exception.TikaException;
 public class FileReaderService {
 
     public String readFile(File file) {
+        AI ai = new AI();
         String text = "";
 
         Tika tika = new Tika();
@@ -20,6 +21,9 @@ public class FileReaderService {
         } catch (IOException | TikaException e) {
             System.out.println("Error reading file: " + e.getMessage());
         }
-        return text.replace("\n", "");
+        String formatted= text.replaceAll("\\s+", " ").trim();
+
+        System.out.println(formatted);
+        return ai.getSummary(formatted);
     }
 }
