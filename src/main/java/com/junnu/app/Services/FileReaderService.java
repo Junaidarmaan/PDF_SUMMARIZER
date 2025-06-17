@@ -26,8 +26,6 @@ public class FileReaderService {
         } catch (IOException | TikaException e) {
             System.out.println("Error reading file: " + e.getMessage());
         }
-        String formatted= text.replaceAll("\\s+", " ").trim();
-        
-        return ai.getSummary(instruction).replace(".", ".\n");
+        return ai.getSummary(instruction);
     }
 }

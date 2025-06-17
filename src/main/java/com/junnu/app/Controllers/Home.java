@@ -33,7 +33,7 @@ public class Home {
             file.transferTo(new File(filePath));
             System.out.println(filePath);
             File uploadedFile = new File(filePath);
-            String result = service.readFile(uploadedFile);
+            String result = service.readFile(uploadedFile,instruction);
             return ResponseEntity.ok("File uploaded successfully!  and the summay is \n" + result );
         } catch (Exception e) {
             e.printStackTrace();
