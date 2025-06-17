@@ -7,11 +7,13 @@ import org.apache.tika.Tika;
 import org.apache.tika.exception.TikaException;
 import org.springframework.stereotype.Service;
 
+import com.junnu.app.DTO.Instructions;
+
 
 @Service
 public class FileReaderService {
 
-    public String readFile(File file) {
+    public String readFile(File file,Instructions instruction) {
         AI ai = new AI();
         String text = "";
 
@@ -25,8 +27,7 @@ public class FileReaderService {
             System.out.println("Error reading file: " + e.getMessage());
         }
         String formatted= text.replaceAll("\\s+", " ").trim();
-        String instruction = 
-    "Summarize the following text into key bullet points.Make each point short, clear, and non-repetitive.Use '-' at the beginning of each pointthis is the input:";
-        return ai.getSummary(formatted,instruction).replace(".", ".\n");
+        
+        return ai.getSummary(instruction).replace(".", ".\n");
     }
 }

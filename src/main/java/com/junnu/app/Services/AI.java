@@ -8,6 +8,8 @@ import java.net.http.HttpRequest.BodyPublishers;
 
 import org.springframework.stereotype.Service;
 
+import com.junnu.app.DTO.Instructions;
+
 
 @Service
 public class AI {
@@ -34,12 +36,8 @@ public class AI {
         }
     }
 
-    public String getSummary(String text,String instruction) {
-        String json = String.format("""
-            {
-                "text": "%s : %s"
-                }
-                """,instruction, text);
+    public String getSummary(Instructions instruction) {
+        String json = instruction.toString();
         System.out.println(json);
         return sendhttpRequest(json);
     }

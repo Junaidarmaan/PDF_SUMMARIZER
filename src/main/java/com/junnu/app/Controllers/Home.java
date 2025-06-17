@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.junnu.app.DTO.Instructions;
 import com.junnu.app.Services.FileReaderService;
 
 import java.io.File;
@@ -19,7 +20,7 @@ public class Home {
 
     @CrossOrigin(origins = "*")
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestBody Instructions instruction ) {
         try {
             String uploadDir = System.getProperty("user.dir") + "/uploads/";
             File directory = new File(uploadDir);
