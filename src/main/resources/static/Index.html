@@ -2,12 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>File Upload</title>
+  <title>File Upload with JSON Instruction</title>
 </head>
 <body>
-  <h2>Upload a File</h2>
-  <form id="uploadForm" enctype="multipart/form-data">
-    <input type="file" name="file" id="fileInput" required />
+  <h2>Upload File with Instruction</h2>
+
+  <form id="uploadForm">
+    <label>Choose File:</label>
+    <input type="file" id="fileInput" name="file" required /><br><br>
+
+    <label>Enter Instruction:</label><br>
+    <textarea id="instruction" rows="4" cols="60" required>
+Summarize the following text briefly by extracting only the most important points. Present the summary as bullet points.
+    </textarea><br><br>
+
     <button type="submit">Upload</button>
   </form>
 
@@ -17,24 +25,28 @@
     document.getElementById("uploadForm").addEventListener("submit", function (e) {
       e.preventDefault();
 
-      const formData = new FormData();
-      const fileInput = document.getElementById("fileInput");
-      const file = fileInput.files[0];
+      const file = document.getElementById("fileInput").files[0];
+      const instruction = document.getElementById("instruction").value;
 
+      const formData = new FormData();
       formData.append("file", file);
+      formData.append("instructionData", new Blob(
+        [JSON.stringify({ instruction: instruction })],
+        { type: "application/json" }
+      ));
 
       fetch("http://localhost:8080/api/files/upload", {
         method: "POST",
         body: formData
       })
-        .then(response => response.text())
-        .then(result => {
-          document.getElementById("responseText").innerText = result;
-        })
-        .catch(error => {
-          console.error("Error:", error);
-          document.getElementById("responseText").innerText = "Error uploading file";
-        });
+      .then(response => response.text())
+      .then(result => {
+        document.getElementById("responseText").innerText = result;
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        document.getElementById("responseText").innerText = "Error uploading file";
+      });
     });
   </script>
 </body>

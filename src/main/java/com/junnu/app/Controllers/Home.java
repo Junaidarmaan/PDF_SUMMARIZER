@@ -20,7 +20,7 @@ public class Home {
 
     @CrossOrigin(origins = "*")
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestBody Instructions instruction ) {
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file,@RequestPart("instructionData") Instructions instruction) {
         try {
             String uploadDir = System.getProperty("user.dir") + "/uploads/";
             File directory = new File(uploadDir);

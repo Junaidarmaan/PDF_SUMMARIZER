@@ -1,4 +1,5 @@
 package com.junnu.app.Services;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -9,7 +10,6 @@ import java.net.http.HttpRequest.BodyPublishers;
 import org.springframework.stereotype.Service;
 
 import com.junnu.app.DTO.Instructions;
-
 
 @Service
 public class AI {
@@ -36,10 +36,18 @@ public class AI {
         }
     }
 
-    public String getSummary(Instructions instruction) {
-        String json = instruction.toString();
-        System.out.println(json);
+
+public String getSummary(Instructions instruction) {
+    try {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(instruction);
+        System.out.println("from AI: " + json);
         return sendhttpRequest(json);
+    } catch (Exception e) {
+        e.printStackTrace();
+        return "Error converting instruction to JSON";
     }
+}
+
 
 }

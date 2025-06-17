@@ -26,6 +26,7 @@ public class FileReaderService {
         } catch (IOException | TikaException e) {
             System.out.println("Error reading file: " + e.getMessage());
         }
+        instruction.setText(text);
         return ai.getSummary(instruction);
     }
 }
