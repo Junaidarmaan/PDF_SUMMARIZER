@@ -35,7 +35,7 @@ Summarize the following text briefly by extracting only the most important point
         { type: "application/json" }
       ));
 
-      fetch("http://localhost:8080/api/files/upload", {
+      fetch("api/files/upload", {
         method: "POST",
         body: formData
       })
