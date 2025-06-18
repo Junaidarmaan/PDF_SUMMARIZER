@@ -35,7 +35,7 @@ Summarize the following text briefly by extracting only the most important point
         { type: "application/json" }
       ));
 
-      fetch("api/files/upload", {
+      fetch("https://pdf-summarizer-498735909112.europe-west1.run.app/api/files/upload", {
         method: "POST",
         body: formData
       })
